@@ -1,2 +1,2 @@
 # odin-calculator
-Simple calculator with simle operations
+Simple calculator with simple operations
