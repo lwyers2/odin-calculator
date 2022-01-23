@@ -1,0 +1,91 @@
+*{
+    box-sizing: border-box;
+}
+
+
+body{
+    display:flex;
+    justify-content: center;
+    
+}
+
+.card {
+    
+    
+    display:flex;
+    background-color: rgba(55, 103, 143, 0.959);
+    
+    align-items: center;
+    border-left: 1px solid black;
+    padding: 10px ;
+    
+    
+}
+
+
+
+.screen{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: slategrey;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    font-size: 60px;
+    color: black;
+    padding:60px;
+}
+
+.stored{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 480;
+   
+    border: 1px solid tomato
+
+}
+
+.entered {
+    display: flex;
+    max-width: 480;
+    border: 1px solid tomato
+
+    }
+
+
+
+.first, .second, .third, .fourth{
+    display: flex;
+    
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+    
+
+        
+}
+
+
+.button{
+    
+    display:flex;
+    justify-content: center;
+    font-size:xx-large;
+    background-color:steelblue;
+    color:whitesmoke;
+    padding:60px;
+    width:25px;
+    border-right: 1px solid black;
+    
+}
+
+#equals {
+
+    
+    flex:2;
+}
+
+
+
+
+
