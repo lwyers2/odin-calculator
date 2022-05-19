@@ -9,15 +9,18 @@
 
 .calculator{
     border: 5px solid black;
-    width: 33%;
+    
     height: 100%;
+    
+    width:469px;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: black;
     border-radius: 5%;
-    flex:.2;
+    
+    
    
 }
 
@@ -86,5 +89,8 @@ border-radius: 5%;
     background-color: rgba(169, 169, 169, 0.603);
     padding: 20px;
     flex:.5;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
