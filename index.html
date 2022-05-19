@@ -10,47 +10,58 @@
 </head>
 
 <body>
-
-    <h1>Calculator</h1>
     <div class="container">
-        <div class="screen">
-            <!-- Going to have to find a limit for how many nubers you can add -->
-            <div class="output">1,000,000,000,000,000,000,000,000, 000,000,,000,000,000,000,000
-            </div>
-            <div class="input">1000000000000000000000000000000</div>
+        <div class="calculator">
 
-        </div>
-        <div class="buttons">
-            <div class="row">
-                <div class="col">7</div>
-                <div class="col">8</div>
-                <div class="col">9</div>
-                <div class="col">C</div>
-                <div class="col">AC</div>
+            <div class="display">
+
+                <div class="input">
+                    <!--35chars-->
+                    999,999,999,999,999,999,999,999,999,
+                    999,999,999,999,999,999,999,999,999,
+                    999,999,999,999,999,999,999,999,999
+                </div>
+                <div class="output">
+                    999,999,999,999,999,999,999,999,999,
+                    999,999,999,999,999,999,999,999,999,
+                    999,999,999,999,999,999,999,999,999 </div>
             </div>
-            <div class="row">
-                <div class="col">4</div>
-                <div class="col">5</div>
-                <div class="col">6</div>
-                <div class="col">/</div>
-                <div class="col">*</div>
-            </div>
-            <div class="row">
-                <div class="col">1</div>
-                <div class="col">2</div>
-                <div class="col">3</div>
-                <div class="col">+</div>
-                <div class="col">-</div>
-            </div>
-            <div class="row">
-                <div class="col">+/-</div>
-                <div class="col">0</div>
-                <div class="col">.</div>
-                <div class="col" id="double">=</div>
+            <div class="buttons">
+                <div class="row" id="first-row">
+                    <div class="calc-but">/</div>
+                    <div class="calc-but">*</div>
+                    <div class="calc-but">-</div>
+                    <div class="calc-but">+</div>
+                </div>
+                <div class="row" id="second-row">
+                    <div class="calc-but">7</div>
+                    <div class="calc-but">8</div>
+                    <div class="calc-but">9</div>
+                    <div class="calc-but">C</div>
+                </div>
+                <div class="row" id="third-row">
+                    <div class="calc-but">4</div>
+                    <div class="calc-but">5</div>
+                    <div class="calc-but">6</div>
+                    <div class="calc-but">CE</div>
+                </div>
+                <div class="row" id="fourth-row">
+                    <div class="calc-but">1</div>
+                    <div class="calc-but">2</div>
+                    <div class="calc-but">3</div>
+                    <div class="calc-but">
+                        REM </div>
+                </div>
+                <div class="row" id="fifth-row">
+                    <div class="calc-but">0</div>
+                    <div class="calc-but">.</div>
+                    <div class="calc-but">=</div>
+                </div>
+
             </div>
         </div>
     </div>
-    <script src="app.js"></script>
+
 </body>
 
 </html>
