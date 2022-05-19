@@ -1,0 +1,32 @@
+//Checklist
+
+//html
+
+1. full container for calc
+	1.1 calculator body
+		1.1.1 calculator display
+			1.1.1.1 calculator input
+			1.1.1.2 claculator output
+		1.1.2 calculator buttons
+			1.1.2.1 numbers
+			1.1.2.2 operators
+//css
+
+1. outer design
+2. inner design
+
+//js
+1. functions
+	1.1 add
+	1.2 subtract
+	1.3 multiply
+	1.4 divide
+2. Populate display
+	2.1 input
+	2.2 output
+
+
+
+
+
+
