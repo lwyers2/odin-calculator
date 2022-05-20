@@ -3,6 +3,9 @@
 enterButtons();
 
 
+
+
+
 function enterButtons() {
 
     let divide = document.querySelector("#divide");
@@ -30,12 +33,12 @@ function enterButtons() {
         console.log("7");
     });
 
-    let eight = document.querySelector("#8");
+    let eight = document.querySelector("#eight");
     eight.addEventListener("click", () => {
         console.log("eight");
     });
 
-    let nine = document.querySelector("#9");
+    let nine = document.querySelector("#nine");
     nine.addEventListener("click", () => {
         console.log("nine");
     });
@@ -45,17 +48,17 @@ function enterButtons() {
         console.log("Clear");
     });
 
-    let four = document.querySelector("#4");
+    let four = document.querySelector("#four");
     four.addEventListener("click", () => {
         console.log("four");
     });
 
-    let five = document.querySelector("#5");
+    let five = document.querySelector("#five");
     five.addEventListener("click", () => {
         console.log("five");
     });
 
-    let six = document.querySelector("#6");
+    let six = document.querySelector("#six");
     six.addEventListener("click", () => {
         console.log("six");
     });
@@ -65,17 +68,17 @@ function enterButtons() {
         console.log("ce");
     });
 
-    let one = document.querySelector("#1");
+    let one = document.querySelector("#one");
     one.addEventListener("click", () => {
         console.log("one");
     });
 
-    let two = document.querySelector("#2");
+    let two = document.querySelector("#two");
     two.addEventListener("click", () => {
         console.log("two");
     });
 
-    let three = document.querySelector("#3");
+    let three = document.querySelector("#three");
     three.addEventListener("click", () => {
         console.log("three");
     });
@@ -85,7 +88,7 @@ function enterButtons() {
         console.log("delete");
     });
 
-    let zero = document.querySelector("#0");
+    let zero = document.querySelector("#zero");
     zero.addEventListener("click", () => {
         console.log("zero");
     });
@@ -102,5 +105,27 @@ function enterButtons() {
 
 
 
+
+}
+
+
+
+
+function add(num1, num2) {
+
+    num1 + num2;
+
+}
+
+function subtract(num1, num2) {
+    num1 - num2;
+
+}
+
+function multiply(num1, num2) {
+
+}
+
+function divide(num1, num2) {
 
 }
