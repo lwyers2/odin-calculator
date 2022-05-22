@@ -6,6 +6,7 @@ enterButtons();
 
 
 
+
 function enterButtons() {
 
     let divide = document.querySelector("#divide");
@@ -111,21 +112,45 @@ function enterButtons() {
 
 
 
-function add(num1, num2) {
 
-    num1 + num2;
+let input = 5;
+
+function enterButton(button) {
+
+    switch (button) {
+        case '1':
+            inputNumber('1');
+            break;
+    }
+
 
 }
 
-function subtract(num1, num2) {
-    num1 - num2;
 
-}
 
-function multiply(num1, num2) {
 
-}
 
-function divide(num1, num2) {
+let add = (a, b) => a + b;
+
+let subtract = (a, b) => a - b;
+
+let multiply = (a, b) => a * b;
+
+let divide = (a, b) => a / b;
+
+
+
+
+
+function calculator(a, b, operator) {
+
+
+
+
+
+    a = parseInt(document.querySelector('.input').innerHTML);
+
+    return (operator(a, b));
+
 
 }
