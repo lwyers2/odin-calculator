@@ -1,5 +1,7 @@
 
-
+let inputA;
+let inputB;
+let conditionalSet = false;
 enterButtons();
 
 
@@ -11,97 +13,97 @@ function enterButtons() {
 
     let divide = document.querySelector("#divide");
     divide.addEventListener("click", () => {
-        console.log("Divide");
+        enterButton("divide");
     });
 
     let multiply = document.querySelector("#multiply");
     multiply.addEventListener("click", () => {
-        console.log("Multiply");
+        enterButton("multiply");
     });
 
     let subtract = document.querySelector("#subtract");
     subtract.addEventListener("click", () => {
-        console.log("subtract");
+        enterButton("subtract");
     });
 
     let add = document.querySelector("#add");
     add.addEventListener("click", () => {
-        console.log("add");
+        enterButton("add");
     });
 
     let seven = document.querySelector("#seven");
     seven.addEventListener("click", () => {
-        console.log("7");
+        enterButton("seven");
     });
 
     let eight = document.querySelector("#eight");
     eight.addEventListener("click", () => {
-        console.log("eight");
+        enterButton("eight");
     });
 
     let nine = document.querySelector("#nine");
     nine.addEventListener("click", () => {
-        console.log("nine");
+        enterButton("nine");
     });
 
     let c = document.querySelector("#c");
     c.addEventListener("click", () => {
-        console.log("Clear");
+        enterButton("Clear");
     });
 
     let four = document.querySelector("#four");
     four.addEventListener("click", () => {
-        console.log("four");
+        enterButton("four");
     });
 
     let five = document.querySelector("#five");
     five.addEventListener("click", () => {
-        console.log("five");
+        enterButton("five");
     });
 
     let six = document.querySelector("#six");
     six.addEventListener("click", () => {
-        console.log("six");
+        enterButton("six");
     });
 
     let ce = document.querySelector("#ce");
     ce.addEventListener("click", () => {
-        console.log("ce");
+        enterButton("ce");
     });
 
     let one = document.querySelector("#one");
     one.addEventListener("click", () => {
-        console.log("one");
+        enterButton("one");
     });
 
     let two = document.querySelector("#two");
     two.addEventListener("click", () => {
-        console.log("two");
+        enterButton("two");
     });
 
     let three = document.querySelector("#three");
     three.addEventListener("click", () => {
-        console.log("three");
+        enterButton("three");
     });
 
     let del = document.querySelector("#delete");
     del.addEventListener("click", () => {
-        console.log("delete");
+        enterButton("delete");
     });
 
     let zero = document.querySelector("#zero");
     zero.addEventListener("click", () => {
-        console.log("zero");
+        enterButton("zero");
     });
 
     let decimal = document.querySelector("#decimal");
     decimal.addEventListener("click", () => {
-        console.log("decimal");
+        enterButton("decimal");
     });
 
     let equal = document.querySelector("#equal");
     equal.addEventListener("click", () => {
-        console.log("equal");
+        enterButton("equal");
     });
 
 
@@ -118,37 +120,236 @@ let input = 5;
 function enterButton(button) {
 
     switch (button) {
-        case '1':
-            inputNumber('1');
+        case 'zero':
+            inputNumber('0');
+            console.log(button + "pressed")
             break;
+        case 'one':
+            inputNumber('1');
+            console.log(button + "pressed")
+            break;
+        case 'two':
+            inputNumber('2');
+            console.log(button + "pressed")
+            break;
+        case 'three':
+            inputNumber('3');
+            console.log(button + "pressed")
+            break;
+        case 'four':
+            inputNumber('4');
+            console.log(button + "pressed")
+            break;
+        case 'five':
+            inputNumber('5');
+            console.log(button + "pressed")
+            break;
+        case 'six':
+            inputNumber('6');
+            console.log(button + "pressed")
+            break;
+        case 'seven':
+            inputNumber('7');
+            console.log(button + "pressed")
+            break;
+        case 'eight':
+            inputNumber('8');
+            console.log(button + "pressed")
+            break;
+        case 'nine':
+            inputNumber('9');
+            console.log(button + "pressed")
+            break;
+        case 'divide':
+            inputConditional('/');
+            console.log(button + " pressed");
+            break;
+        case 'multiply':
+            inputConditional('*');
+            console.log(button + " pressed");
+            break;
+        case 'add':
+            inputConditional('+');
+            console.log(button + " pressed");
+            break;
+        case 'subtract':
+            inputConditional('-');
+            console.log(button + " pressed");
+            break;
+
     }
 
+
+}
+
+function inputNumber(number) {
+
+    let input = document.querySelector('.input');
+
+
+
+
+    if (input.innerHTML.length == 24 || input.innerHTML.length == 46) {
+        let inputText = document.createTextNode(number);
+        input.removeChild(input.lastChild);
+        input.appendChild(inputText);
+    } else {
+        let inputText = document.createTextNode(number);
+        input.appendChild(inputText);
+    }
+
+
+}
+
+function inputConditional(conditional) {
+
+
+
+    let input = document.querySelector('.input');
+
+    if (hasOperator(input.innerHTML)) {
+        let inputA = getInputA(input.innerHTML);
+        let inputB = getInputB(input.innerHTML);
+        let inputOperator = getOperation(getInputOperation(input.innerHTML));
+        console.log('A: ' + inputA);
+        console.log('Oper: ' + inputOperator);
+        console.log('B: ' + inputB);
+        console.log(calculate(inputA, inputB, inputOperator));
+    } else {
+
+        input.style.fontSize = 'large';
+        let inputText = document.createTextNode(conditional);
+        input.appendChild(inputText);
+    }
+}
+
+function hasOperator(string) {
+
+
+
+    for (let i = 0; i < string.length; i++) {
+
+        let isNum = /^\d+$/.test(string.charAt(i));
+
+        if (!isNum) {
+            return true;
+        }
+
+
+    }
+
+    return false;
+
+}
+
+
+
+function getOperation(operator) {
+
+    let add = (a, b) => a + b;
+
+    let subtract = (a, b) => a - b;
+
+    let multiply = (a, b) => a * b;
+
+    let divide = (a, b) => a / b;
+
+
+    if (operator == '/') {
+
+        return divide;
+    } else if (operator == '*') {
+        return multiply;
+    } else if (operator == '-') {
+        return subtract;
+    } else if (operator == '+') {
+        return add;
+    }
+}
+
+
+function getInputOperation(string) {
+
+
+
+    for (let i = 0; i < string.length; i++) {
+
+        let isNum = /^\d+$/.test(string.charAt(i));
+
+        if (!isNum) {
+            return string.charAt(i);
+        }
+
+
+    }
+
+    return false;
 
 }
 
 
 
 
+function getInputA(string) {
 
-let add = (a, b) => a + b;
+    let nums = '';
 
-let subtract = (a, b) => a - b;
+    for (let i = 0; i < string.length; i++) {
 
-let multiply = (a, b) => a * b;
-
-let divide = (a, b) => a / b;
-
+        let isNum = /^\d+$/.test(string.charAt(i));
 
 
 
+        if (!isNum) {
 
-function calculator(a, b, operator) {
+            nums = parseInt(nums);
+
+            return nums;
+        }
+
+
+        nums += string.charAt(i);
 
 
 
 
 
-    a = parseInt(document.querySelector('.input').innerHTML);
+    }
+
+
+}
+
+
+function getInputB(string) {
+
+    let nums;
+
+    for (let i = 0; i < string.length; i++) {
+
+        let isNum = /^\d+$/.test(string.charAt(i));
+
+
+
+        if (!isNum) {
+
+            nums = string.substring(i + 1, string.length);
+
+            nums = parseInt(nums);
+            return nums;
+        }
+
+
+    }
+
+}
+
+function calculate(a, b, operator) {
+
+
+
+
+
+    // a = parseInt(document.querySelector('.input').innerHTML);
 
     return (operator(a, b));
 

@@ -46,6 +46,9 @@ border-radius: 5%;
     margin-top: 10px;
   margin-bottom: 10px;
     height:45%;
+    font-size: xx-large;
+    flex-wrap: wrap;
+    
 }
 
 .output {
