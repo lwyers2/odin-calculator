@@ -207,14 +207,13 @@ function inputConditional(conditional) {
 
     let input = document.querySelector('.input');
 
+
     if (hasOperator(input.innerHTML)) {
         let inputA = getInputA(input.innerHTML);
         let inputB = getInputB(input.innerHTML);
         let inputOperator = getOperation(getInputOperation(input.innerHTML));
-        console.log('A: ' + inputA);
-        console.log('Oper: ' + inputOperator);
-        console.log('B: ' + inputB);
-        console.log(calculate(inputA, inputB, inputOperator));
+
+        updateCalculation(calculate(inputA, inputB, inputOperator), conditional);
     } else {
 
         input.style.fontSize = 'large';
@@ -353,5 +352,15 @@ function calculate(a, b, operator) {
 
     return (operator(a, b));
 
+
+}
+
+function updateCalculation(number, operator) {
+    let input = document.querySelector('.input');
+    let output = document.querySelector('.output');
+
+    input.innerHTML = number + operator;
+
+    output.innerHTML = number;
 
 }
