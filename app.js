@@ -16,6 +16,12 @@ function enterButtons() {
         enterButton("divide");
     });
 
+    divide.addEventListener('keydown', () => {
+        enterButton("divide");
+    });
+
+
+
     let multiply = document.querySelector("#multiply");
     multiply.addEventListener("click", () => {
         enterButton("multiply");
@@ -48,7 +54,7 @@ function enterButtons() {
 
     let c = document.querySelector("#c");
     c.addEventListener("click", () => {
-        enterButton("Clear");
+        enterButton("c");
     });
 
     let four = document.querySelector("#four");
@@ -86,10 +92,7 @@ function enterButtons() {
         enterButton("three");
     });
 
-    let del = document.querySelector("#delete");
-    del.addEventListener("click", () => {
-        enterButton("delete");
-    });
+
 
     let zero = document.querySelector("#zero");
     zero.addEventListener("click", () => {
@@ -118,6 +121,9 @@ function enterButtons() {
 let input = 5;
 
 function enterButton(button) {
+
+    let input = document.querySelector('.input');
+    let inputLength = input.innerHTML.length;
 
     switch (button) {
         case 'zero':
@@ -161,21 +167,51 @@ function enterButton(button) {
             console.log(button + "pressed")
             break;
         case 'divide':
-            inputConditional('/');
-            console.log(button + " pressed");
-            break;
+            if (inputLength == 0) {
+                break;
+            } else {
+                inputConditional('/');
+                console.log(button + " pressed");
+                break;
+            }
         case 'multiply':
-            inputConditional('*');
-            console.log(button + " pressed");
-            break;
+            if (inputLength == 0) {
+                break;
+            } else {
+                inputConditional('*');
+                console.log(button + " pressed");
+                break;
+            }
         case 'add':
-            inputConditional('+');
-            console.log(button + " pressed");
-            break;
+            if (inputLength == 0) {
+                break;
+            } else {
+                inputConditional('+');
+                console.log(button + " pressed");
+                break;
+            }
+
         case 'subtract':
             inputConditional('-');
             console.log(button + " pressed");
             break;
+
+        case 'equal':
+            inputEqual();
+            console.log(button + ' pressed');
+            break;
+
+
+        case 'c':
+            deleteLast();
+            console.log(button + ' pressed');
+            break;
+
+        case 'ce':
+            reset();
+            console.log(button + ' pressed');
+            break;
+
 
     }
 
@@ -222,11 +258,51 @@ function inputConditional(conditional) {
     }
 }
 
+
+function inputEqual() {
+
+    let input = document.querySelector('.input');
+    let inputText = document.querySelector('.input').innerHTML;
+    let output = document.querySelector('.output');
+
+    let a = getInputA(inputText);
+    let b;
+    let c;
+
+    if (getInputOperation(inputText).length == 1) {
+
+        console.log('true')
+        b = getInputB(inputText);
+        c = getInputOperation(inputText);
+        c = getOperation(c);
+
+        input.innerHTML = calculate(a, b, c);
+        output.innerHTML = calculate(a, b, c);
+
+
+    }
+
+
+}
+
+function makeNegative() {
+    let input = document.querySelector('.input');
+    let inputText = document.createTextNode('-');
+    input.appendChild(inputText);
+}
+
 function hasOperator(string) {
 
+    let start = 0;
+
+    if (string.charAt(0) == '-') {
+
+        start = 1;
+
+    }
 
 
-    for (let i = 0; i < string.length; i++) {
+    for (let i = start; i < string.length; i++) {
 
         let isNum = /^\d+$/.test(string.charAt(i));
 
@@ -270,8 +346,15 @@ function getOperation(operator) {
 function getInputOperation(string) {
 
 
+    let start = 0;
 
-    for (let i = 0; i < string.length; i++) {
+    if (string.charAt(0) == '-') {
+
+        start = 1;
+
+    }
+
+    for (let i = start; i < string.length; i++) {
 
         let isNum = /^\d+$/.test(string.charAt(i));
 
@@ -292,13 +375,24 @@ function getInputOperation(string) {
 function getInputA(string) {
 
     let nums = '';
+    let start = 0;
 
-    for (let i = 0; i < string.length; i++) {
+    if (string.charAt(0) == '-') {
+        nums = '-';
+        start = 1;
+        console.log(nums)
+    }
+
+
+    for (let i = start; i < string.length; i++) {
 
         let isNum = /^\d+$/.test(string.charAt(i));
 
 
 
+        console.log(start);
+        console.log(nums)
+        console.log(string.charAt(i));
         if (!isNum) {
 
             nums = parseInt(nums);
@@ -316,14 +410,22 @@ function getInputA(string) {
     }
 
 
+
 }
 
 
 function getInputB(string) {
 
     let nums;
+    let start = 0;
 
-    for (let i = 0; i < string.length; i++) {
+    if (string.charAt(0) == '-') {
+
+        start = 1;
+        console.log(nums)
+    }
+
+    for (let i = start; i < string.length; i++) {
 
         let isNum = /^\d+$/.test(string.charAt(i));
 
@@ -363,4 +465,17 @@ function updateCalculation(number, operator) {
 
     output.innerHTML = number;
 
+}
+
+function deleteLast() {
+    let input = document.querySelector('.input');
+    input.innerHTML = input.innerHTML.substring(0, input.innerHTML.length - 1);
+
+}
+
+function reset() {
+    let input = document.querySelector('.input');
+    let output = document.querySelector('.output');
+    input.innerHTML = '';
+    output.innerHTML = '';
 }
