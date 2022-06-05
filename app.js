@@ -118,7 +118,7 @@ function enterButtons() {
 
 
 
-let input = 5;
+
 
 function enterButton(button) {
 
@@ -220,16 +220,20 @@ function enterButton(button) {
 
 function inputNumber(number) {
 
+    //create dom element for input box
     let input = document.querySelector('.input');
 
 
 
-
+    // this will only sllow a certain ammount of numbers to be inputted in first go
     if (input.innerHTML.length == 24 || input.innerHTML.length == 46) {
         let inputText = document.createTextNode(number);
+        //remove the last number 
         input.removeChild(input.lastChild);
+        //replace last number with new number
         input.appendChild(inputText);
     } else {
+        //add number to inpt box
         let inputText = document.createTextNode(number);
         input.appendChild(inputText);
     }
@@ -304,12 +308,22 @@ function hasOperator(string) {
 
     for (let i = start; i < string.length; i++) {
 
-        let isNum = /^\d+$/.test(string.charAt(i));
+        switch (string.charAt(i)) {
+            case '/':
+                return true;
+                break;
+            case '*':
+                return true;
+                break;
+            case '-':
+                return true;
+                break;
+            case '+':
+                return true;
+                break;
 
-        if (!isNum) {
-            return true;
+
         }
-
 
     }
 
@@ -386,16 +400,16 @@ function getInputA(string) {
 
     for (let i = start; i < string.length; i++) {
 
-        let isNum = /^\d+$/.test(string.charAt(i));
+        let isNum = hasOperator(string.charAt(i));
 
 
 
         console.log(start);
         console.log(nums)
         console.log(string.charAt(i));
-        if (!isNum) {
+        if (isNum) {
 
-            nums = parseInt(nums);
+            nums = parseFloat(nums);
 
             return nums;
         }
@@ -427,15 +441,15 @@ function getInputB(string) {
 
     for (let i = start; i < string.length; i++) {
 
-        let isNum = /^\d+$/.test(string.charAt(i));
+        let isNum = hasOperator(string.charAt(i));
 
 
 
-        if (!isNum) {
+        if (isNum) {
 
             nums = string.substring(i + 1, string.length);
 
-            nums = parseInt(nums);
+            nums = parseFloat(nums);
             return nums;
         }
 
