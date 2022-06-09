@@ -167,29 +167,23 @@ function enterButton(button) {
             console.log(button + "pressed")
             break;
         case 'divide':
-            if (inputLength == 0) {
-                break;
-            } else {
-                inputConditional('/');
-                console.log(button + " pressed");
-                break;
-            }
+
+            inputConditional('/');
+            console.log(button + " pressed");
+            break;
+
         case 'multiply':
-            if (inputLength == 0) {
-                break;
-            } else {
-                inputConditional('*');
-                console.log(button + " pressed");
-                break;
-            }
+
+            inputConditional('*');
+            console.log(button + " pressed");
+            break;
+
         case 'add':
-            if (inputLength == 0) {
-                break;
-            } else {
-                inputConditional('+');
-                console.log(button + " pressed");
-                break;
-            }
+
+            inputConditional('+');
+            console.log(button + " pressed");
+            break;
+
 
         case 'subtract':
             inputConditional('-');
@@ -220,22 +214,59 @@ function enterButton(button) {
 
 function inputNumber(number) {
 
-    //create dom element for input box
+    //create dom element for output box
+    let output = document.querySelector('.output');
     let input = document.querySelector('.input');
 
+    if (input.innerHTML.length > 1) {
 
 
-    // this will only sllow a certain ammount of numbers to be inputted in first go
-    if (input.innerHTML.length == 24 || input.innerHTML.length == 46) {
         let inputText = document.createTextNode(number);
+        input.appendChild(inputText);
+
+
+
+        let operator = getOperation(input.innerHTML.charAt(0));
+        let a = parseFloat(output.innerHTML);
+        let b = parseFloat(input.innerHTML.substring(1, input.innerHTML.length));
+        let potNum = calculate(a, b, operator);
+
+        output.replaceChildren();
+
+        //create text node with number
+        let outputText = document.createTextNode(potNum);
+
+        //add new number
+        output.appendChild(outputText);
+
+
+    } else if (output.innerHTML.length == 24) {
+
+
+
+
+        //changes size to large for space
+        output.style.fontSize = 'large';
+
+        //create text node with number
+        let outputText = document.createTextNode(number);
+
+        //add new number
+        output.appendChild(outputText);
+
+
+
+
+    } else if (output.innerHTML.length == 46) {
+        let outputText = document.createTextNode(number);
         //remove the last number 
-        input.removeChild(input.lastChild);
+        output.removeChild(output.lastChild);
         //replace last number with new number
-        input.appendChild(inputText);
+        output.appendChild(outputText);
     } else {
-        //add number to inpt box
-        let inputText = document.createTextNode(number);
-        input.appendChild(inputText);
+        //add number to output box
+        let outputText = document.createTextNode(number);
+        output.appendChild(outputText);
     }
 
 
@@ -243,23 +274,53 @@ function inputNumber(number) {
 
 function inputConditional(conditional) {
 
-
-
+    //get output from dom
+    let output = document.querySelector('.output');
+    //get input from dom
     let input = document.querySelector('.input');
+    //get output length from dom
+    let outputLength = output.innerHTML.length;
+    //get input length from dom
+    let inputLength = input.innerHTML.length;
+
+    //console.log(outputLength);
+
+    // can put negative or posiive number. Check if no number has been inputted yet, then check if conditional is positve or negative sign 
+    if ((outputLength == 0) && (conditional == '-' || conditional == '+')) {
 
 
-    if (hasOperator(input.innerHTML)) {
-        let inputA = getInputA(input.innerHTML);
-        let inputB = getInputB(input.innerHTML);
-        let inputOperator = getOperation(getInputOperation(input.innerHTML));
+        let outputText = document.createTextNode(conditional + ' ');
+        output.appendChild(outputText);
 
-        updateCalculation(calculate(inputA, inputB, inputOperator), conditional);
+    } else if ((hasOperator(input.innerHTML)) && inputLength == 2) {
+
+        let inputText = document.createTextNode(conditional + ' ');
+        //remove the last number 
+        input.removeChild(input.lastChild);
+        //replace last number with new number
+        input.appendChild(inputText);
+    } else if ((hasOperator(input.innerHTML)) && inputLength > 2) {
+
+
+
+
+        input.replaceChildren();
+
+        let inputText = document.createTextNode(conditional + ' ');
+        input.appendChild(inputText);
+
+
+
+    } else if (outputLength == 0) {
+        let outputText = document.createTextNode('');
+        output.appendChild(outputText);
     } else {
 
-        input.style.fontSize = 'large';
-        let inputText = document.createTextNode(conditional);
+        let inputText = document.createTextNode(conditional + ' ');
         input.appendChild(inputText);
+
     }
+
 }
 
 
@@ -299,11 +360,7 @@ function hasOperator(string) {
 
     let start = 0;
 
-    if (string.charAt(0) == '-') {
 
-        start = 1;
-
-    }
 
 
     for (let i = start; i < string.length; i++) {
@@ -321,8 +378,6 @@ function hasOperator(string) {
             case '+':
                 return true;
                 break;
-
-
         }
 
     }
