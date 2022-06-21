@@ -1,9 +1,160 @@
+let Calculator = class Calculator {
 
-let inputA;
-let inputB;
-let conditionalSet = false;
+    constructor(hasOperatorSet, isNegativeA, isNegativeB) {
+        this.hasOperatorSet = hasOperatorSet;
+        this.isNegativeA = isNegativeA;
+        this.isNegativeB = isNegativeB;
+    }
+
+    //Setters
+    setA(newA) {
+
+        if (typeof newA === 'undefined') {
+            this.a = newA;
+        } else {
+            newA = newA.toString();
+
+            if (newA.charAt(0) === '-') {
+                this.isNegativeA = true;
+            } else {
+                this.isNegativeA = false;
+            }
+            this.a = parseFloat(newA);
+        }
+    }
+
+    setB(newB) {
+        if (typeof newB === 'undefined') {
+            this.b = newB;
+        } else {
+            newB = newB.toString();
+
+            if (newB.charAt(0) == '-') {
+                this.isNegativeB = true;
+            } else {
+                this.isNegativeB = false;
+            }
+            this.b = parseFloat(newB);
+        }
+    }
+
+
+
+    setOperator(newOperator) {
+        this.operator = newOperator;
+    }
+
+
+    setResult(result) {
+
+        if (typeof result === 'undefined') {
+            this.result = result;
+        } else {
+
+            if (result.charAt(0) == '-') {
+                this.isNegativeA = true;
+            } else {
+                this.isNegativeA = false;
+            }
+            this.result = parseFloat(result);
+            this.a = this.result;
+        }
+
+
+    }
+
+    setHasOperatorSet(hasOperatorSet) {
+        this.hasOperatorSet = hasOperatorSet;
+    }
+
+    setIsNegativeA(isNegativeA) {
+
+
+
+        this.isNegativeA = isNegativeA;
+    }
+
+
+    setIsNegativeB(isNegativeB) {
+        this.isNegativeB = isNegativeB;
+    }
+
+    //getters
+    get getA() {
+        return this.a;
+    }
+
+    get getB() {
+        return this.b;
+    }
+
+    get getOperator() {
+        return this.operator;
+    }
+
+    get getResult() {
+        return this.result;
+    }
+
+    get getHasOperatorSet() {
+        return this.hasOperatorSet;
+    }
+
+    get getIsNegativeA() {
+        return this.isNegativeA
+    }
+
+    get getIsNegativeB() {
+        return this.isNegativeB
+    }
+
+
+
+
+    //returns and sets the result of a calculation
+    calculate() {
+
+        let add = (a, b) => (a) + (b);
+
+        let subtract = (a, b) => (a) - (b);
+
+        let multiply = (a, b) => (a) * (b);
+
+        let divide = (a, b) => (a) / (b);
+
+        let operation;
+
+        if (this.operator == '/') {
+
+            operation = divide;
+        } else if (this.operator == '*') {
+            operation = multiply;
+        } else if (this.operator == '-') {
+            operation = subtract;
+        } else if (this.operator == '+') {
+            operation = add;
+        }
+
+        if (operation === divide && this.b === 0) {
+            alert("Cannot Divide by 0! Please hit 'CE' to Reset")
+        } else {
+
+
+            let calculation = (operation(this.a, this.b));
+            //update calculators's stored result
+            this.result = parseFloat(calculation);
+            this.hasOperatorSet = false;
+        }
+    }
+
+
+
+
+}
 enterButtons();
+//create new instance of calculator
 
+const p1 = new Calculator(false, false, false);
 
 
 
@@ -11,565 +162,263 @@ enterButtons();
 
 function enterButtons() {
 
+    //event listeners for all buttons
+
     let divide = document.querySelector("#divide");
     divide.addEventListener("click", () => {
-        enterButton("divide");
+        inputOperator('/');
+        console.log("pressed");
     });
-
-    divide.addEventListener('keydown', () => {
-        enterButton("divide");
-    });
-
-
 
     let multiply = document.querySelector("#multiply");
     multiply.addEventListener("click", () => {
-        enterButton("multiply");
+        inputOperator('*');
     });
 
     let subtract = document.querySelector("#subtract");
     subtract.addEventListener("click", () => {
-        enterButton("subtract");
+        inputOperator('-');
     });
 
     let add = document.querySelector("#add");
     add.addEventListener("click", () => {
-        enterButton("add");
+        inputOperator('+');
     });
 
     let seven = document.querySelector("#seven");
     seven.addEventListener("click", () => {
-        enterButton("seven");
+        inputNumber('7');
     });
 
     let eight = document.querySelector("#eight");
     eight.addEventListener("click", () => {
-        enterButton("eight");
+        inputNumber('8');
     });
 
     let nine = document.querySelector("#nine");
     nine.addEventListener("click", () => {
-        enterButton("nine");
+        inputNumber('9');
     });
 
     let c = document.querySelector("#c");
     c.addEventListener("click", () => {
-        enterButton("c");
+        deleteLast();
     });
 
     let four = document.querySelector("#four");
     four.addEventListener("click", () => {
-        enterButton("four");
+        inputNumber('4');
     });
 
     let five = document.querySelector("#five");
     five.addEventListener("click", () => {
-        enterButton("five");
+        inputNumber('5');
     });
 
     let six = document.querySelector("#six");
     six.addEventListener("click", () => {
-        enterButton("six");
+        inputNumber('6');
     });
 
     let ce = document.querySelector("#ce");
     ce.addEventListener("click", () => {
-        enterButton("ce");
+        reset();
     });
 
     let one = document.querySelector("#one");
     one.addEventListener("click", () => {
-        enterButton("one");
+        inputNumber('1');
     });
 
     let two = document.querySelector("#two");
     two.addEventListener("click", () => {
-        enterButton("two");
+        inputNumber('2');
     });
 
     let three = document.querySelector("#three");
     three.addEventListener("click", () => {
-        enterButton("three");
+        inputNumber('3');
     });
 
 
 
     let zero = document.querySelector("#zero");
     zero.addEventListener("click", () => {
-        enterButton("zero");
+        inputNumber('0');
     });
 
     let decimal = document.querySelector("#decimal");
     decimal.addEventListener("click", () => {
-        enterButton("decimal");
+        addDecimal();
     });
 
     let equal = document.querySelector("#equal");
     equal.addEventListener("click", () => {
-        enterButton("equal");
+        equals();
     });
 
 
 
-
 }
 
-
-
-
-
-
-
-function enterButton(button) {
-
-    let input = document.querySelector('.input');
-    let inputLength = input.innerHTML.length;
-
-
-
-
-    switch (button) {
-        case 'zero':
-            inputNumber('0');
-            console.log(button + "pressed")
-            break;
-        case 'one':
-            inputNumber('1');
-            console.log(button + "pressed")
-            break;
-        case 'two':
-            inputNumber('2');
-            console.log(button + "pressed")
-            break;
-        case 'three':
-            inputNumber('3');
-            console.log(button + "pressed")
-            break;
-        case 'four':
-            inputNumber('4');
-            console.log(button + "pressed")
-            break;
-        case 'five':
-            inputNumber('5');
-            console.log(button + "pressed")
-            break;
-        case 'six':
-            inputNumber('6');
-            console.log(button + "pressed")
-            break;
-        case 'seven':
-            inputNumber('7');
-            console.log(button + "pressed")
-            break;
-        case 'eight':
-            inputNumber('8');
-            console.log(button + "pressed")
-            break;
-        case 'nine':
-            inputNumber('9');
-            console.log(button + "pressed")
-            break;
-        case 'divide':
-
-            inputConditional('/');
-            console.log(button + " pressed");
-            break;
-
-        case 'multiply':
-
-            inputConditional('*');
-            console.log(button + " pressed");
-            break;
-
-        case 'add':
-
-            inputConditional('+');
-            console.log(button + " pressed");
-            break;
-
-
-        case 'subtract':
-            inputConditional('-');
-            console.log(button + " pressed");
-            break;
-
-        case 'equal':
-            inputEqual();
-            console.log(button + ' pressed');
-            break;
-
-
-        case 'c':
-            deleteLast();
-            console.log(button + ' pressed');
-            break;
-
-        case 'ce':
-            reset();
-            console.log(button + ' pressed');
-            break;
-
-
-    }
-
-
-}
 
 function inputNumber(number) {
 
-    //create dom element for output box
-    let output = document.querySelector('.output');
-    let input = document.querySelector('.input');
-
-    if (input.innerHTML.length >= 24) {
-
-        input.style.fontSize = 'large';
-
-    }
 
 
-    if (input.innerHTML.length >= 46) {
 
-        let inputText = document.createTextNode(number);
-        //remove the last number 
-        input.removeChild(input.lastChild);
-        //replace last number with new number
-        input.appendChild(inputText);
 
+    if (p1.getHasOperatorSet || (typeof p1.getResult !== 'undefined')) {
+
+
+        inputNumberB(number)
     } else {
-
-
-        if (input.innerHTML.length > 1) {
-
-
-            let inputText = document.createTextNode(number);
-            input.appendChild(inputText);
-
-            let op = getInputOperation(input.innerHTML);
-
-            let operator = getOperation(op);
-            let a = getInputA(input.innerHTML);
-            let b = getInputB(input.innerHTML);
-            let potNum = calculate(a, b, operator);
-
-            output.replaceChildren();
-
-            //create text node with number
-            let outputText = document.createTextNode(potNum);
-
-            //add new number
-            output.appendChild(outputText);
-
-
-        } else if (output.innerHTML.length >= 24) {
-
-
-
-
-            //changes size to large for space
-            output.style.fontSize = 'large';
-
-            //create text node with number
-            let outputText = document.createTextNode(number);
-
-            //add new number
-            output.appendChild(outputText);
-
-
-
-
-        } else if (output.innerHTML.length >= 46) {
-            let outputText = document.createTextNode(number);
-            //remove the last number 
-            output.removeChild(output.lastChild);
-            //replace last number with new number
-            output.appendChild(outputText);
-        } else {
-            //add number to output box
-            let outputText = document.createTextNode(number);
-            output.appendChild(outputText);
-        }
+        inputNumberA(number)
     }
-
 }
 
-function inputConditional(conditional) {
 
-    //get output from dom
+
+
+
+function inputNumberA(number) {
+    //create dom element for output box
     let output = document.querySelector('.output');
-    //get input from dom
-    let input = document.querySelector('.input');
-    //get output length from dom
-    let outputLength = output.innerHTML.length;
-    //get input length from dom
-    let inputLength = input.innerHTML.length;
+
+    if (typeof p1.getA !== 'undefined') {
+        output.innerHTML = p1.getA;
+    }
+
+
+
+    if (output.innerHTML.length >= 24) {
 
 
 
 
+        //changes size to large for space
+        output.style.fontSize = 'large';
 
-    //console.log(outputLength);
+        //create text node with number
+        let outputText = document.createTextNode(number);
 
-    if (outputLength == 1 && (output.innerHTML.charAt(0) == '-' || output.innerHTML.charAt(0) == '+') && (conditional == '-' || conditional == '+')) {
+        //add new number
+        output.appendChild(outputText);
 
-        let outputText = document.createTextNode(conditional);
+        p1.setA(parseFloat(output.innerHTML));
+        output.innerHTML = p1.getA;
+
+
+
+
+    } else if (output.innerHTML.length >= 46) {
+        let outputText = document.createTextNode(number);
         //remove the last number 
         output.removeChild(output.lastChild);
         //replace last number with new number
         output.appendChild(outputText);
-
-        let inputText = document.createTextNode(conditional);
-        //remove the last number 
-        input.removeChild(input.lastChild);
-        //replace last number with new number
-        input.appendChild(inputText);
-
-    }
-
-
-
-    // can put negative or posiive number. Check if no number has been inputted yet, then check if conditional is positve or negative sign 
-    if ((outputLength == 0) && (conditional == '-' || conditional == '+')) {
-
-
-        let outputText = document.createTextNode(conditional);
-        output.appendChild(outputText);
-
-    } else if ((hasOperator(input.innerHTML)) && inputLength > 2) {
-        input.replaceChildren();
-
-        let inputText = document.createTextNode(output.innerHTML + ' ' + conditional + ' ');
-        input.appendChild(inputText);
-
-
-
-    } else if (outputLength == 0) {
-        let outputText = document.createTextNode('');
-        output.appendChild(outputText);
+        p1.setA(parseFloat(output.innerHTML));
+        output.innerHTML = p1.getA;
     } else {
-
-        let inputText = document.createTextNode(output.innerHTML + ' ' + conditional + ' ');
-        input.appendChild(inputText);
-
-    }
-
-}
-
-
-function inputEqual() {
-
-    let input = document.querySelector('.input');
-    let inputText = document.querySelector('.input').innerHTML;
-    let output = document.querySelector('.output').innerHTML;
-
-    let a = getInputA(inputText);
-    let b;
-    let c;
-
-    if (getInputOperation(inputText).length == 1) {
-
-        console.log('true')
-        b = getInputB(inputText);
-        c = getInputOperation(inputText);
-        c = getOperation(c);
-
-
-        output.innerHTML = calculate(a, b, c);
-
-
+        //add number to output box
+        let outputText = document.createTextNode(number);
+        output.appendChild(outputText);
+        p1.setA(parseFloat(output.innerHTML));
+        output.innerHTML = p1.getA;
 
     }
 
-
+    console.log("A= " + p1.getA);
 }
 
-function makeNegative() {
+function inputNumberB(number) {
+
     let input = document.querySelector('.input');
-    let inputText = document.createTextNode('-');
+
+
+
+
+    let inputText = document.createTextNode(number);
     input.appendChild(inputText);
-}
-
-function hasOperator(string) {
-
-    let start = 0;
-
-    if (string.charAt(0) == '-') {
-        start = 1;
-    }
+    let b = input.innerHTML.substring(2, input.innerHTML.length)
+    p1.setB(parseFloat(b));
+    input.innerHTML = p1.getOperator + ' ' + p1.getB;
+    console.log("B= " + p1.getB);
 
 
 
 
-    for (let i = start; i < string.length; i++) {
-
-        switch (string.charAt(i)) {
-            case '/':
-                return true;
-                break;
-            case '*':
-                return true;
-                break;
-            case '-':
-                return true;
-                break;
-            case '+':
-                return true;
-                break;
-        }
-
-    }
-
-    return false;
-
-}
-
-
-
-function getOperation(operator) {
-
-    let add = (a, b) => (a) + (b);
-
-    let subtract = (a, b) => (a) - (b);
-
-    let multiply = (a, b) => (a) * (b);
-
-    let divide = (a, b) => (a) / (b);
-
-
-    if (operator == '/') {
-
-        return divide;
-    } else if (operator == '*') {
-        return multiply;
-    } else if (operator == '-') {
-        return subtract;
-    } else if (operator == '+') {
-        return add;
-    }
-}
-
-
-function getInputOperation(string) {
-
-
-    let start = 0;
-
-    if (string.charAt(0) == '-') {
-
-        start = 1;
-
-    }
-
-    for (let i = start; i < string.length; i++) {
-
-        let isNum = hasOperator(string.charAt(i));
-
-        if (isNum) {
-            return string.charAt(i);
-        }
-
-
-    }
-
-    return false;
 
 }
 
 
 
 
-function getInputA(string) {
-
-    let nums = '';
-    let start = 0;
-
-    if (string.charAt(0) == '-') {
-        nums = '-';
-        start = 1;
-        console.log(nums)
-    }
-
-
-    for (let i = start; i < string.length; i++) {
-
-        let isNum = hasOperator(string.charAt(i));
-
-
-
-        console.log(start);
-        console.log(nums)
-        console.log(string.charAt(i));
-        if (isNum) {
-
-            nums = parseFloat(nums);
-
-            return nums;
-        }
-
-
-        nums += string.charAt(i);
 
 
 
 
 
-    }
+function inputOperator(operator) {
 
 
-
-}
-
-
-function getInputB(string) {
-
-    let nums;
-    let start = 0;
-
-    if (string.charAt(0) == '-') {
-
-        start = 1;
-        console.log(nums)
-    }
-
-    for (let i = start; i < string.length; i++) {
-
-        let isNum = hasOperator(string.charAt(i));
-
-
-
-        if (isNum) {
-
-            nums = string.substring(i + 1, string.length);
-
-            nums = parseFloat(nums);
-            return nums;
-        }
-
-
-    }
-
-}
-
-function calculate(a, b, operator) {
-
-
-
-
-
-    // a = parseInt(document.querySelector('.input').innerHTML);
-
-    return (operator(a, b));
-
-
-}
-
-function updateCalculation(number, operator) {
     let input = document.querySelector('.input');
     let output = document.querySelector('.output');
+    console.log("PRESSED");
+    if ((typeof p1.getA === 'undefined') && (operator == '-')) {
 
-    input.innerHTML = number + operator;
+        p1.setIsNegativeA(true);
+        output.innerHTML = '-';
 
-    output.innerHTML = number;
+
+
+    } else {
+
+
+
+        if ((p1.getHasOperatorSet) && (typeof p1.getB !== 'undefined')) {
+            p1.calculate();
+
+            p1.setA(p1.getResult);
+            output.innerHTML = p1.getA;
+            p1.setOperator(operator)
+            p1.setHasOperatorSet(true)
+            input.innerHTML = p1.getOperator + ' ';
+            p1.setB(0);
+
+
+        } else if (p1.getHasOperatorSet && (typeof p1.getB === 'undefined') && operator == '-') {
+            p1.setIsNegativeB(true);
+
+
+        } else if (p1.getHasOperatorSet && (typeof p1.getB === 'undefined')) {
+            p1.setOperator(operator)
+            p1.setHasOperatorSet(true)
+            input.innerHTML = p1.getOperator + ' ';
+
+
+        } else {
+            p1.setOperator(operator)
+            p1.setHasOperatorSet(true)
+            input.innerHTML = p1.getOperator + ' ';
+
+
+        }
+    }
+
+}
+
+
+function reset() {
+    let input = document.querySelector('.input');
+    let output = document.querySelector('.output');
+    input.innerHTML = '';
+    output.innerHTML = '';
+    p1.setA(undefined);
+    p1.setB(undefined);
+    p1.setOperator(undefined);
+    p1.setHasOperatorSet(false);
+    p1.setResult(undefined);
 
 }
 
@@ -577,19 +426,91 @@ function deleteLast() {
 
     let input = document.querySelector('.input');
     let output = document.querySelector('.output');
-    if (hasOperator(input.innerHTML)) {
 
-        if (hasOperator(input.innerHTML.charAt(input.innerHTML.length))) {
-            input.innerHTML = input.innerHTML + ' ';
+
+    if (p1.hasOperatorSet) {
+
+
+        //check if operator set(will always be 2 due to space)
+        if (input.innerHTML.length == 2) {
+            input.innerHTML = '';
+            p1.setHasOperatorSet(false);
+        } else {
+
+            input.innerHTML = input.innerHTML.substring(0, input.innerHTML.length - 1);
+            p1.setB(parseInt(input.innerHTML.substring(0, input.innerHTML.length - 1)));
+
         }
 
-        input.innerHTML = input.innerHTML.substring(0, input.innerHTML.length - 1);
+
+    } else {
+
+        if (output.innerHTML.length > 1) {
+            console.log("hi")
+            output.innerHTML = output.innerHTML.substring(0, output.innerHTML.length - 1);
+            p1.setA(parseFloat(output.innerHTML.substring(0, output.innerHTML.length - 1)))
+
+        } else {
+            output.innerHTML = '0';
+            p1.setA(0);
+        }
+    }
+
+}
+
+function addDecimal() {
+
+    let input = document.querySelector('.input');
+    let output = document.querySelector('.output');
+    if (p1.hasOperatorSet) {
+
+        if ((!containsDec(p1.getB)) && (input.innerHTML.length > 2)) {
+            let inputText = document.createTextNode('.');
+            input.appendChild(inputText);
+            let b = input.innerHTML.substring(2, input.innerHTML.length)
+            p1.setB(parseFloat(b));
+        }
+
+
+    } else {
+
+        if (!containsDec(p1.getA)) {
+            console.log("pressed")
+            let outputText = document.createTextNode('.');
+            output.appendChild(outputText);
+
+            p1.setA(output.innerhtml);
+
+        }
     }
 }
 
-function reset() {
-    let input = document.querySelector('.input');
+
+function containsDec(string) {
+
+    string = string.toString();
+
+    for (let i = 0; i < string.length; i++) {
+        if (i == '.') {
+            return true;
+        }
+
+    }
+    return false;
+
+}
+
+
+function equals() {
     let output = document.querySelector('.output');
-    input.innerHTML = '';
-    output.innerHTML = '';
+    let input = document.querySelector('.input');
+    if (typeof p1.getB !== 'undefined') {
+
+        p1.calculate();
+
+        p1.setA(p1.getResult);
+        output.innerHTML = p1.getA;
+        p1.setHasOperatorSet(false)
+        p1.setB(0);
+    }
 }
