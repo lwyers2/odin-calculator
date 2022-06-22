@@ -157,7 +157,47 @@ enterButtons();
 const p1 = new Calculator(false, false, false);
 
 
+document.addEventListener('keydown', pressButtons);
 
+function pressButtons(e) {
+    console.log(e.key);
+
+    if (e.key === '1') {
+        inputNumber('1');
+    } else if (e.key === '2') {
+        inputNumber('2');
+    } else if (e.key === '3') {
+        inputNumber('3');
+    } else if (e.key === '4') {
+        inputNumber('4');
+    } else if (e.key === '5') {
+        inputNumber('5');
+    } else if (e.key === '6') {
+        inputNumber('6');
+    } else if (e.key === '7') {
+        inputNumber('7');
+    } else if (e.key === '8') {
+        inputNumber('8');
+    } else if (e.key === '9') {
+        inputNumber('9');
+    } else if (e.key === '/') {
+        inputOperator('/');
+    } else if (e.key === '*') {
+        inputOperator('*');
+    } else if (e.key === '-') {
+        inputOperator('-');
+    } else if (e.key === '+') {
+        inputOperator('+');
+    } else if (e.key === 'Enter') {
+        equals();
+    } else if (e.key === '.') {
+        decimal();
+    } else if (e.key === 'Delete') {
+        deleteLast();
+    } else if (e.key === 'Backspace') {
+        deleteLast();
+    }
+}
 
 
 function enterButtons() {
@@ -169,6 +209,8 @@ function enterButtons() {
         inputOperator('/');
         console.log("pressed");
     });
+
+
 
     let multiply = document.querySelector("#multiply");
     multiply.addEventListener("click", () => {
